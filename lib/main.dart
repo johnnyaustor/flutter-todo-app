@@ -2,11 +2,11 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-// import 'package:flutter/services.dart';
-import 'widgets/chart.dart';
 
 import './widgets/new_transaction.dart';
 import 'models/transaction.dart';
+// import 'package:flutter/services.dart';
+import 'widgets/chart.dart';
 import 'widgets/transaction_list.dart';
 
 void main() {
@@ -28,10 +28,14 @@ class MyApp extends StatelessWidget {
       title: "Personal Expenses",
       theme: ThemeData(
         primarySwatch: Colors.purple,
-        accentColor: Colors.amber,
+        colorScheme: ColorScheme.fromSwatch(
+          primarySwatch: Colors.purple,
+        ).copyWith(
+          secondary: Colors.amber,
+        ),
         fontFamily: 'Quicksand',
-        textTheme: const TextTheme().copyWith(
-          headline6: const TextStyle(
+        textTheme: const TextTheme(
+          titleMedium: TextStyle(
             fontFamily: 'OpenSans',
             fontWeight: FontWeight.bold,
             fontSize: 18,
@@ -45,13 +49,13 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      home: MyHomePage(),
+      home: const MyHomePage(),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key? key}) : super(key: key);
+  const MyHomePage({Key? key}) : super(key: key);
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -74,7 +78,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return _transactions.where((tx) {
       return tx.date.isAfter(
         DateTime.now().subtract(
-          Duration(days: 7),
+          const Duration(days: 7),
         ),
       );
     }).toList();
@@ -156,10 +160,10 @@ class _MyHomePageState extends State<MyHomePage> {
                 children: [
                   Text(
                     'show chart',
-                    style: Theme.of(context).textTheme.headline6,
+                    style: Theme.of(context).textTheme.titleMedium,
                   ),
                   Switch.adaptive(
-                    activeColor: Theme.of(context).accentColor,
+                    activeColor: Theme.of(context).colorScheme.secondary,
                     value: _showChart,
                     onChanged: (val) {
                       setState(() {

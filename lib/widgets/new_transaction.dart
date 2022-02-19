@@ -1,6 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+
+import './adaptive_text_button.dart';
 
 class NewTransaction extends StatefulWidget {
   final Function onPressCallback;
@@ -77,13 +78,7 @@ class _NewTransactionState extends State<NewTransaction> {
                             : 'Picked Date: ${DateFormat.yMd().format(_dateSelected!)}',
                       ),
                     ),
-                    TextButton(
-                      onPressed: _showDatePicker,
-                      child: const Text(
-                        'Coose Date',
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                    ),
+                    AdaptiveTextButton('Choose Date', _showDatePicker),
                   ],
                 ),
               ),
